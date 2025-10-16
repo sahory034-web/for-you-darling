@@ -77,9 +77,9 @@
   <div class="progress-dots" id="progress-dots"></div>
   <div id="autoplayNotice">Si no escuchas la música automáticamente, toca la pantalla o el corazón ❤️</div>
 
-  <audio id="bg-music" preload="auto" loop>
-    <source src="Castillo de naipes.mp3" type="audio/mpeg">
-  </audio>
+ <audio id="bg-music" preload="auto" controls>
+  <source src="Castillo de naipes.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 const slides = Array.from(document.querySelectorAll('.slide'));
@@ -158,3 +158,4 @@ window.onload=()=>{stars();createDots();};
 </script>
 </body>
 </html>
+
