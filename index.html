@@ -1,64 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>For you, darling 💌</title>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  html,body{height:100%}
+  /* RESET BASICO */
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html, body{height:100%;}
+  
+  /* ESTILOS GLOBALES */
   body{
     background:#000;color:#fff;font-family:"Courier New",monospace;
-    overflow:hidden;display:flex;align-items:center;justify-content:center;
-    touch-action:manipulation;cursor:pointer;
+    overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;
+    cursor:pointer;
   }
-  #intro-screen{
-    position:fixed;inset:0;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;background:#000;z-index:20;
+  
+  /* BOTÓN DE INICIO */
+  #startBtn{
+    font-size:2rem;padding:20px 40px;background:#ff0066;border:none;border-radius:12px;cursor:pointer;
+    z-index: 10;
   }
-  #intro-text{font-size:clamp(1.4rem,4vw,2rem);margin-bottom:18px;opacity:0;
-    animation:fadeIn 1.6s forwards 0.6s;text-align:center;padding:0 16px}
-  #heart{font-size:clamp(3rem,10vw,6rem);animation:pulse 2s infinite,float 3s ease-in-out infinite;transition:transform .25s}
-  #heart:hover{transform:scale(1.08)}
-  @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.18)}100%{transform:scale(1)}}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-  .stars{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-  .star{position:absolute;background:#fff;border-radius:50%;opacity:.9;filter:drop-shadow(0 0 4px rgba(255,255,255,.6));animation:fall linear infinite,blink 1s infinite alternate}
+  
+  /* FONDO DE ESTRELLAS */
+  .stars{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+  .star{position:absolute;background:#fff;border-radius:50%;opacity:.9;filter:drop-shadow(0 0 4px rgba(255,255,255,.6));animation:fall linear infinite,blink 1s infinite alternate;}
   @keyframes fall{to{transform:translateY(110vh)}}
   @keyframes blink{from{opacity:.3}to{opacity:1}}
 
+  /* DIAPOSITIVAS */
   .slide{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;z-index:5;opacity:0;transition:opacity .9s}
   .slide.active{display:flex;opacity:1}
-  .message{max-width:90%;min-height:3em;margin-bottom:14px;font-size:clamp(1rem,2.4vw,1.8rem);text-shadow:0 0 8px rgba(255,255,255,.45)}
+  
+  /* MENSAJE DE TEXTO */
+  .message{max-width:90%;min-height:3em;margin-bottom:14px;font-size:clamp(1rem,2.4vw,1.8rem);text-shadow:0 0 8px rgba(255,255,255,.45);}
   .hacker-text{color:#fff;text-shadow:0 0 5px #fff,0 0 10px #fff,0 0 15px #0073e6;transition:all .08s}
   .hacker-text.complete{animation:strongGlow .6s infinite alternate}
   @keyframes strongGlow{from{text-shadow:0 0 10px #fff,0 0 20px #fff,0 0 30px #ff00ff}to{text-shadow:0 0 15px #fff,0 0 25px #fff,0 0 35px #ff00ff,0 0 45px #ff00ff}}
-
-  .slide img{width:min(70vw,360px);height:auto;border-radius:12px;margin:8px 0;object-fit:contain;filter:drop-shadow(0 0 12px rgba(156,39,176,.6))}
+  
+  /* IMAGEN */
+  .slide img{width:min(70vw,360px);height:auto;border-radius:12px;margin:8px 0;object-fit:contain;filter:drop-shadow(0 0 12px rgba(156,39,176,.6));}
+  
+  /* PUNTOS DE PROGRESO */
   .progress-dots{position:fixed;left:0;right:0;bottom:18px;display:flex;justify-content:center;gap:8px;z-index:30}
   .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:transform .18s,background .18s}
   .dot.active{background:#fff;transform:scale(1.25)}
-
-  @media (max-height:500px){ .slide{padding:12px} .slide img{width:min(40vh,220px)} .message{font-size:1rem} }
-
-  #autoplayNotice{position:fixed;top:12px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.06);padding:8px 14px;border-radius:999px;font-size:.9rem;z-index:60;display:none}
 </style>
 </head>
 <body>
 
-<div id="intro-screen">
-  <div id="intro-text">Tengo algo para ti mi amor</div>
-  <div id="heart" role="button">❤️</div>
-</div>
+<button id="startBtn">❤️ Toca aquí para comenzar ❤️</button>
 
 <div class="stars" id="stars"></div>
 
-<!-- Diapositivas completas -->
 <div class="slide"><div class="message"><div class="hacker-text">For you, darling 💌</div></div><img src="https://media1.tenor.com/m/pUM4MBfvp7YAAAAC/bubu-dudu-sleep-dudu.gif"></div>
 <div class="slide"><div class="message"><div class="hacker-text">Amor sabes que yo no soy de palabras...</div></div><img src="https://media1.tenor.com/m/T8CnxVzCvBEAAAAC/peach-and-goma-peach-goma.gif"></div>
-<div class="slide"><div class="message"><div class="hacker-text">Te amo y quiero estar contigo</div></div><img src="https://media1.tenor.com/m/iMLeUDZgX4EAAAAC/dare-bunny-aggie-bunny.gif"></div>
+<div class="slide"><div class="message"><div class="hacker-text">Te amo y quiero estar contigo</div></div><img src="https://media1.tenor.com/m/iMleUDZgX4EAAAAC/dare-bunny-aggie-bunny.gif"></div>
 <div class="slide"><div class="message"><div class="hacker-text">Ser tu apoyo, tu amiga, tu confidente</div></div><img src="https://media.tenor.com/OrxXcqX25KcAAAAi/dudu-bubu-love-gif.gif"></div>
 <div class="slide"><div class="message"><div class="hacker-text">Quiero estar allí para ti, ser el hombro donde puedas llorar</div></div><img src="https://media1.tenor.com/m/iEpREd-mF-oAAAAd/hug-comfort.gif"></div>
 <div class="slide"><div class="message"><div class="hacker-text">Ser tu alegría y tu vida</div></div><img src="https://media.tenor.com/ffG8ZgTeQ74AAAAi/peach-and-goma-cute.gif"></div>
@@ -76,82 +73,100 @@
 <div class="slide"><div class="message"><div class="hacker-text">Te amo más que a las estrellas</div></div><img src="https://media1.tenor.com/m/c_pjFrFrN_UAAAAd/cute.gif"></div>
 
 <div class="progress-dots" id="progress-dots"></div>
-<div id="autoplayNotice">Si no escuchas la música automáticamente, toca la pantalla o el corazón ❤️</div>
 
-<!-- Música -->
-<audio id="bg-music" loop>
+<audio id="bgMusic" loop controls style="position: absolute; bottom: 0; opacity: 0.01; pointer-events: none;">
   <source src="Castillo de naipes.mp3" type="audio/mpeg">
 </audio>
 
 <script>
+const startBtn = document.getElementById('startBtn');
+const bgMusic = document.getElementById('bgMusic');
 const slides = Array.from(document.querySelectorAll('.slide'));
-const dots = document.getElementById('progress-dots');
-const heart = document.getElementById('heart');
-const intro = document.getElementById('intro-screen');
-const bgMusic = document.getElementById('bg-music');
-const notice = document.getElementById('autoplayNotice');
+const dotsContainer = document.getElementById('progress-dots');
 let current = 0, timer;
 
-const phrases = Array.from(document.querySelectorAll('.hacker-text')).map(e=>e.textContent);
+// Captura las frases para el efecto de "hacker"
+const phrases = slides.map(s=>s.querySelector('.hacker-text').textContent);
 
+// --- FUNCIONES DE LA PRESENTACIÓN ---
+
+// 1. Crear los puntos de navegación
 function createDots(){
-  dots.innerHTML='';
+  dotsContainer.innerHTML='';
   slides.forEach((s,i)=>{
-    const d=document.createElement('div');
-    d.className='dot'+(i==0?' active':'');
-    d.dataset.i=i;
-    d.onclick=()=>{show(i)};
-    dots.appendChild(d);
+    const dot = document.createElement('div');
+    dot.className='dot'+(i===0?' active':'');
+    dot.dataset.i=i;
+    dot.onclick = ()=>showSlide(i); // Navegación manual
+    dotsContainer.appendChild(dot);
   });
 }
 
+// 2. Efecto de "texto de hacker"
 function hackerEffect(el,txt){
   const chars="01!@#$%^&*()_+-=[]{}|;:,.<>?/";
   let n=0;
   const it=setInterval(()=>{
-    el.textContent=txt.split('').map((ch,i)=>i<n?txt[i]:chars[Math.floor(Math.random()*chars.length)]).join('');
-    if(n++>=txt.length){clearInterval(it);el.textContent=txt;el.classList.add('complete');}
+    // Muestra los caracteres correctos hasta 'n', luego caracteres aleatorios
+    el.textContent = txt.split('').map((ch,i)=>i<n?txt[i]:chars[Math.floor(Math.random()*chars.length)]).join('');
+    if(n++>=txt.length){
+      clearInterval(it);
+      el.textContent=txt;
+      el.classList.add('complete'); // Añade un brillo final
+    }
   },30);
 }
 
-function show(i){
+// 3. Mostrar la diapositiva
+function showSlide(i){
   slides.forEach(s=>s.classList.remove('active'));
   slides[i].classList.add('active');
-  Array.from(dots.children).forEach((d,k)=>d.classList.toggle('active',k==i));
-  const t=slides[i].querySelector('.hacker-text');
-  if(t){t.classList.remove('complete');hackerEffect(t,phrases[i]);}
-  current=i;reset();
+  Array.from(dotsContainer.children).forEach((d,k)=>d.classList.toggle('active',k===i));
+  
+  const text = slides[i].querySelector('.hacker-text');
+  if(text){
+    text.classList.remove('complete');
+    hackerEffect(text,phrases[i]); // Aplica el efecto de texto
+  }
+  current=i;
+  resetTimer();
 }
 
-function next(){show((current+1)%slides.length);}
-function reset(){clearInterval(timer);timer=setInterval(next,8000);}
+// 4. Lógica de avance automático
+function nextSlide(){showSlide((current+1)%slides.length);}
+function resetTimer(){clearInterval(timer);timer=setInterval(nextSlide,8000);} // Cambia cada 8 segundos
 
-function stars(){
-  const c=document.getElementById('stars');c.innerHTML='';
+// 5. Generar el fondo de estrellas
+function generateStars(){
+  const starsEl = document.getElementById('stars');
+  starsEl.innerHTML='';
   for(let i=0;i<90;i++){
     const s=document.createElement('div');s.className='star';
-    const sz=Math.random()*2.5+0.8;s.style.width=s.style.height=`${sz}px`;
-    s.style.left=`${Math.random()*100}%`;s.style.top=`-${Math.random()*120}%`;
-    s.style.animationDuration=`${Math.random()*10+6}s`;s.style.animationDelay=`${Math.random()*6}s`;
-    c.appendChild(s);
+    const size=Math.random()*2.5+0.8;s.style.width=s.style.height=`${size}px`;
+    s.style.left=`${Math.random()*100}%`; s.style.top=`-${Math.random()*120}%`;
+    s.style.animationDuration=`${Math.random()*10+6}s`; // Duración de la caída
+    s.style.animationDelay=`${Math.random()*6}s`; // Retraso para que no caigan todas a la vez
+    starsEl.appendChild(s);
   }
 }
 
-function start(){
-  intro.style.display='none';
-  stars();
+// --- INICIO DE LA APLICACIÓN ---
+
+// Inicia al tocar el botón
+startBtn.addEventListener('click', ()=>{
+  startBtn.style.display='none';
+  generateStars();
   createDots();
-  show(0);
-  bgMusic.volume = 0.3;
-  const playPromise = bgMusic.play();
-  if (playPromise !== undefined) {
-    playPromise.catch(()=>{notice.style.display='block';});
-  }
-}
-
-// Se asegura que el primer toque reproduzca la música
-heart.addEventListener('click', start);
-document.body.addEventListener('click', start, { once: true });
+  showSlide(0);
+  
+  // Reproduce la música con un volumen bajo
+  bgMusic.volume = 0.3; 
+  bgMusic.play().catch(e=>{
+    console.log("Error al intentar reproducir la música:", e);
+    // Si falla la reproducción automática, es probable que la persona deba tocar la pantalla de nuevo.
+  });
+});
 </script>
+
 </body>
 </html>
