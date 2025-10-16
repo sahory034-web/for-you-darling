@@ -50,7 +50,7 @@
 
 <div id="intro-screen">
   <div id="intro-text">Tengo algo para ti mi amor</div>
-  <div id="heart" role="button">❤️</div>
+  <div id="heart" role="button" aria-label="Comenzar presentación">❤️</div>
 </div>
 
 <div class="stars" id="stars"></div>
@@ -79,9 +79,8 @@
 <div id="autoplayNotice">Si no escuchas la música automáticamente, toca la pantalla o el corazón ❤️</div>
 
 <!-- Música -->
-<audio id="bg-music" preload="auto">
+<audio id="bg-music" preload="auto" loop>
   <source src="Castillo de naipes.mp3" type="audio/mpeg">
-  Tu navegador no soporta audio.
 </audio>
 
 <script>
@@ -93,7 +92,7 @@ const bgMusic = document.getElementById('bg-music');
 const notice = document.getElementById('autoplayNotice');
 let current = 0, timer;
 
-const phrases = slides.map(s => s.querySelector('.hacker-text').textContent);
+const phrases = Array.from(document.querySelectorAll('.hacker-text')).map(e=>e.textContent);
 
 function createDots(){
   dots.innerHTML='';
@@ -144,11 +143,12 @@ function start(){
   createDots();
   show(0);
   bgMusic.volume = 0.3;
-  bgMusic.play().then(()=>{notice.style.display='none';}).catch(()=>{notice.style.display='block';});
+  bgMusic.play().then(()=>{ notice.style.display='none'; }).catch(()=>{ notice.style.display='block'; });
 }
 
+// Se asegura que la música se active al primer toque en cualquier dispositivo
 heart.onclick = start;
-document.onclick = ()=>{if(intro.style.display!=='none') start();};
+document.addEventListener('click', ()=>{if(intro.style.display!=='none') start();}, {once:true});
 </script>
 </body>
 </html>
