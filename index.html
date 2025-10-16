@@ -79,6 +79,7 @@
 
  <audio id="bg-music" preload="auto" controls>
   <source src="Castillo de naipes.mp3" type="audio/mpeg">
+  Tu navegador no soporta audio.
 </audio>
 
 <script>
@@ -148,8 +149,9 @@ function start(){
 }
 
 function playMusic(){
-  bgMusic.volume=0.3;
-  bgMusic.play().then(()=>{notice.style.display='none';}).catch(()=>{notice.style.display='block';});
+  bgMusic.volume = 0.3;
+  bgMusic.play().then(() => { notice.style.display = 'none'; })
+              .catch(() => { notice.style.display = 'block'; });
 }
 
 heart.onclick=start;
@@ -158,5 +160,6 @@ window.onload=()=>{stars();createDots();};
 </script>
 </body>
 </html>
+
 
 
