@@ -55,7 +55,7 @@
 
 <div class="stars" id="stars"></div>
 
-<!-- Diapositivas -->
+<!-- Diapositivas completas -->
 <div class="slide"><div class="message"><div class="hacker-text">For you, darling 💌</div></div><img src="https://media1.tenor.com/m/pUM4MBfvp7YAAAAC/bubu-dudu-sleep-dudu.gif"></div>
 <div class="slide"><div class="message"><div class="hacker-text">Amor sabes que yo no soy de palabras...</div></div><img src="https://media1.tenor.com/m/T8CnxVzCvBEAAAAC/peach-and-goma-peach-goma.gif"></div>
 <div class="slide"><div class="message"><div class="hacker-text">Te amo y quiero estar contigo</div></div><img src="https://media1.tenor.com/m/iMLeUDZgX4EAAAAC/dare-bunny-aggie-bunny.gif"></div>
@@ -143,10 +143,15 @@ function start(){
   createDots();
   show(0);
   bgMusic.volume = 0.3;
-  bgMusic.play().catch(()=>{notice.style.display='block';});
+  const playPromise = bgMusic.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(()=>{notice.style.display='block';});
+  }
 }
 
+// Se asegura que el primer toque reproduzca la música
 heart.addEventListener('click', start);
+document.body.addEventListener('click', start, { once: true });
 </script>
 </body>
 </html>
